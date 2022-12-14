@@ -26,6 +26,7 @@ class TreeNode {
   }
 
   print(level = 0) {
+    console.log(level)
     let result = '';
     for (let i = 0; i < level; i++) {
       result += '-- ';

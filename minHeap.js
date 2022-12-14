@@ -1,0 +1,97 @@
+class MinHeap {
+    constructor() {
+      this.heap = [ null ];
+      this.size = 0;
+    }
+  
+    add(value) {
+      console.log(`.. adding ${value}`);
+      this.heap.push(value);
+      this.size++;
+      this.bubbleUp();
+      console.log(`added ${value} to heap`, this.heap);
+    }
+
+    bubbleUp() {
+      let current = this.size;
+      while (current > 1 && this.heap[getParent(current)] > this.heap[current]) {
+        console.log(`.. swap ${this.heap[current]} with parent ${this.heap[getParent(current)]}`);
+        this.swap(current, getParent(current));
+        console.log('..', this.heap);
+        current = getParent(current);
+      }
+    }
+
+    swap(a, b) {
+      [this.heap[a], this.heap[b]] = [this.heap[b], this.heap[a]];
+    }
+
+    popMin() {
+      if (this.size === 0) {
+        return null
+      }
+      console.log(`\n.. Swap ${this.heap[1]} with last element ${this.heap[this.size]}`);
+      this.swap(1, this.size);
+      const min = this.heap.pop();
+      this.size--;
+      console.log(`.. Removed ${min} from heap`);
+      console.log('..',this.heap);
+      this.heapify()
+      return min;
+    }
+  
+    heapify() {
+      console.log('Heapify');
+      let current = 1;
+      let leftChild = getLeft(current);
+      let rightChild = getRight(current);
+  
+      while (this.canSwap(current, leftChild, rightChild)) {
+        if(this.exists(leftChild) && this.exists(rightChild)) {
+          if(this.heap[leftChild] < this.heap[rightChild]) {
+            this.swap(current, leftChild)
+            current = leftChild
+          } else if(this.heap[rightChild] < this.heap[leftChild]) {
+            this.swap(current, rightChild)
+            current = rightChild
+          }
+        } else {
+          this.swap(current, leftChild)
+          current = leftChild
+        }
+  
+        leftChild = getLeft(current);
+        rightChild = getRight(current);
+  
+      }
+    }
+
+    canSwap(current, leftChild, rightChild) {
+      // Check that one of the possible swap conditions exists
+      return (
+        this.exists(leftChild) && this.heap[current] > this.heap[leftChild]
+        || this.exists(rightChild) && this.heap[current] > this.heap[rightChild]
+      );
+    }
+  
+    exists(index) {
+      return index <= this.size;
+    }
+  
+  }
+  
+  const getParent = current => Math.floor((current / 2));
+  const getLeft = current => current * 2;
+  const getRight = current => current * 2 + 1;
+  
+  module.exports = MinHeap;
+  
+  const heap1 = new MinHeap()
+
+  heap1.add(1)
+  heap1.add(2)
+  heap1.add(2)
+  heap1.add(7)
+
+  heap1.popMin()
+  console.log(heap1.heap)
