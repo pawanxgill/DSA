@@ -85,13 +85,3 @@ class MinHeap {
   const getRight = current => current * 2 + 1;
   
   module.exports = MinHeap;
-  
-  const heap1 = new MinHeap()
-
-  heap1.add(1)
-  heap1.add(2)
-  heap1.add(2)
-  heap1.add(7)
-
-  heap1.popMin()
-  console.log(heap1.heap)
