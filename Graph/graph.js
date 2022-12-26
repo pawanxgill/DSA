@@ -1,5 +1,4 @@
-const Edge = require('./Edge.js');
-const Vertex = require('./Vertex.js');
+const Vertex = require('./vertex.js');
 
 class Graph {
   constructor(isWeighted = false, isDirected = false) {

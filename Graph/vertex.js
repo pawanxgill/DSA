@@ -1,4 +1,4 @@
-const Edge = require('./Edge.js');
+const Edge = require('./edge');
 
 class Vertex {
   constructor(data) {
