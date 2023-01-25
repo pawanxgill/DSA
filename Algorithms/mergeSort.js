@@ -26,11 +26,6 @@ const mergeSort = (startArray) => {
     return sortedArray.concat(leftArray).concat(rightArray);
   }
   
-  
-  const inputArr = [3, 5, 2, 90, 4, 7];
-  
-  console.log(mergeSort(inputArr));
-  
   module.exports = {
     mergeSort
   };
